@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Til Olympic</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <style>
+    @font-face {
+      font-family: 'LINESeedKR-Bd';
+      src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/LINESeedKR-Bd.woff2') format('woff2');
+      font-weight: 700;
+      font-style: normal;
+    }
+
+    /* 기본 스타일은 모바일 레이아웃으로 설정 */
+    body {
+      font-family: 'LINESeedKR-Bd', sans-serif; /* 기본 폰트를 LINESeedKR-Bd로 설정 */
+      line-height: 1.6;
+      margin: 20px;
+      background-color: #00e360;
+      color: #010101;
+    }
+    .header {
+      font-weight: 700;
+      font-size: 1.5em;
+      text-align: right;
+      margin-top: -12px;
+      color: #010101;
+    }
+    .main-title {
+      text-align: left;
+      font-size: 2.93em;
+      margin-bottom: 10px;
+      margin-top: 5px;
+      font-weight: 800;
+      color: #010101;
+    }
+    .author {
+      font-size: 1.2em;
+      font-weight: 600;
+      text-align: right;
+      color: #010101;
+    }
+    h2 {
+      font-size: 1.8em;
+      margin-top: 30px;
+      margin-bottom: 10px;
+      font-weight: 800;
+      text-align: left;
+      color: #010101;
+    }
+    .episode-list {
+      margin-top: 30px;
+      text-align: center;
+    }
+    .episode-list ul {
+      list-style-type: none;
+      padding: 0;
+    }
+    .episode-list li {
+      opacity: 0;
+      transition: opacity 0.5s ease-in, transform 0.3s ease-in-out; /* 호버 애니메이션 부드럽게 */
+      margin-bottom: 30px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 15px;
+      background-color: #f2f2f7;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      cursor: pointer;
+    }
+    .episode-list li.visible {
+      opacity: 1;
+    }
+    .episode-list li:hover {
+      transform: translateY(-5px); /* 호버 시 이동 효과 */
+    }
+    .episode-list img {
+      max-width: 100%;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      margin-bottom: 15px;
+    }
+    .episode-list h3 {
+      font-size: 1.5em;
+      margin-bottom: 5px;
+      color: #010101;
+      text-align: left;
+      width: 100%;
+      padding: 0 15px;
+    }
+    .loading {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.3);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: #fff;
+      font-size: 1.5em;
+      font-weight: bold;
+      z-index: 9999;
+    }
+    .partners {
+      text-align: center;
+      margin-top: 30px;
+      margin-bottom: 30px;
+    }
+    .partners h2 {
+      font-size: 1.8em;
+      margin-bottom: 15px;
+      color: #010101;
+    }
+    .partners .partner-logos {
+      display: flex;
+      justify-content: space-around;
+      flex-wrap: nowrap;
+      gap: 20px;
+      overflow-x: auto;
+    }
+    .partners .partner-logos a {
+      display: inline-block;
+      width: 80px; /* 로고의 너비를 고정 */
+      height: 80px; /* 로고의 높이를 고정 */
+      border-radius: 10px; /* 둥근 모서리 설정 */
+      overflow: hidden; /* 둥근 사각형 내에서 넘치는 부분을 숨김 */
+      background-color: #fff; /* 배경색 설정 (선택 사항) */
+      transition: transform 0.3s; /* 호버 애니메이션 부드럽게 */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .partners .partner-logos img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain; /* 이미지가 비율을 유지하며 크기에 맞게 조정 */
+    }
+    .partners .partner-logos a:hover img {
+      transform: scale(1.1); /* 호버 시 확대 효과 */
+    }
+    @media (min-width: 731px) {
+      body {
+        margin: 0 auto;
+        max-width: 730px;
+        background-color: #00e360;
+        padding: 20px;
+      }
+      .header {
+        font-size: 1.5em;
+        text-align: right;
+        margin-top: -12px;
+      }
+      .main-title {
+        text-align: left;
+        font-size: 2.93em;
+        margin-bottom: 10px;
+        margin-top: 5px;
+      }
+      .author {
+        font-size: 1.2em;
+        text-align: right;
+      }
+      h2 {
+        font-size: 1.8em;
+        margin-top: 30px;
+        margin-bottom: 10px;
+        text-align: left;
+      }
+      .episode-list li {
+        margin-bottom: 30px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 15px;
+        background-color: #f2f2f7;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        transition: opacity 0.5s ease-in, transform 0.3s ease-in-out; /* 호버 애니메이션 부드럽게 */
+      }
+      .episode-list img {
+        max-width: 100%;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        margin-bottom: 15px;
+      }
+      .episode-list h3 {
+        font-size: 1.5em;
+        margin-bottom: 5px;
+        color: #010101;
+        text-align: left;
+        width: 100%;
+        padding: 0 15px;
+      }
+    }
+    @media (max-width: 385px) {
+      body {
+        margin: 0 auto;
+        padding: 15px;
+        background-color: #00e360;
+      }
+      .header {
+        font-size: 1.2em;
+        text-align: center;
+        margin-top: 0;
+      }
+      .main-title {
+        font-size: 2em;
+        text-align: center;
+      }
+      .author {
+        text-align: center;
+        margin-bottom: 10px;
+      }
+      h2 {
+        font-size: 1.5em;
+        text-align: left;
+      }
+      .episode-list li {
+        margin-bottom: 30px;
+        display: block;
+        text-align: left;
+      }
+      .episode-list img {
+        max-width: 100%;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        margin-bottom: 15px;
+      }
+      .episode-list h3 {
+        font-size: 1.5em;
+        margin-bottom: 5px;
+        color: #010101;
+        text-align: left;
+        width: 100%;
+        padding: 0 15px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="loading" id="loading">사진을 서버에서 불러오는 중입니다...<br>최대 3분 소요됩니다.<br>기다려주셔서 감사합니다. :D</div>
+  <header class="header" id="header">
+    <!-- LA28 올림픽 디데이 -->
+  </header>
+  <h1 class="main-title">Til Olympic<br>올림픽까지</h1>
+  <div class="author">신지성</div>
+
+  <div class="partners">
+    <h2>Official Partners</h2>
+    <div class="partner-logos">
+      <a href="https://samsung.com" target="_blank"><img src="https://images.samsung.com/is/image/samsung/assets/global/about-us/brand/logo/256_144_2.png?$512_N_PNG$" alt="SAMSUNG"></a>
+      <a href="https://samsung.com" target="_blank"><img src="https://images.samsung.com/kdp/goods/2024/07/07/939145dc-5201-4a75-a3ba-8f6110fa9732.png?$944_550_PNG$" alt="GalaxyWatchUltra"></a>
+      <a href="https://kia.com" target="_blank"><img src="https://www.logo-designer.co/storage/2021/01/2021-kia-new-logo-design.png" alt="KIA"></a>
+      <a href="https://kia.com" target="_blank"><img src="https://www.kia.com/content/dam/kwp/kr/ko/vehicles/ev3/24my/gallery/image/ev3_gallery_image_04.jpg" alt="EV3"></a>
+      <a href="https://naver.com" target="_blank"><img src="https://play-lh.googleusercontent.com/-REeRpbsL3nQTjoDfRzxvqgdqwtp6Pflbx8P3aqvCQsed5zJabGZ4qYC01G_q-9svn4" alt="NAVERPAY"></a>
+    </div>
+  </div>
+
+  <div class="episode-list">
+    <h2>episode list</h2>
+    <ul id="episode-list">
+      <!-- JSON 데이터로 동적으로 채워질 부분 -->
+    </ul>
+  </div>
+
+  <script>
+    const episodes = [
+      { id: 5, title: "(파트너) 네이버페이, 신지성과 파트너쉽 채결.", imageUrl: "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/ae/39/da/ae39da5b-cd00-c4b4-5dc2-bfa196aa9f4b/AppIcon-0-0-1x_U007emarketing-0-7-0-sRGB-85-220.png/1200x630wa.png", clickUrl: "https://jisungeda55.github.io/picabooletter/ep1" },
+      { id: 4, title: "(파트너) 기아자동차, 신지성과 파트너쉽 채결.", imageUrl: "https://www.kia.com/content/dam/kwp/kr/ko/vehicles/ev3/24my/gallery/image/ev3_gallery_image_02.jpg", clickUrl: "https://jisungeda55.github.io/picabooletter/ep1" },
+      { id: 3, title: "(파트너) 삼성전자, 신지성과 파트너쉽 채결.", imageUrl: "https://logos-world.net/wp-content/uploads/2020/11/Samsung-Galaxy-Logo.png", clickUrl: "https://jisungeda55.github.io/picabooletter" },
+      { id: 2, title: "ep.02 종목 선정 및 로드맵 구상.", imageUrl: "https://img.olympics.com/images/image/private/t_original_380/f_auto/primary/akaa8vibrfow67u1cwm9"},
+      { id: 1, title: "ep.01 네? 올림픽에 도전하자고요?", imageUrl: "https://media.nbclosangeles.com/2023/12/web-231206-olympics-rings-paris.jpg?quality=85&strip=all"}
+      // 기타 episode들 추가
+    ];
+
+    const episodeList = document.getElementById('episode-list');
+    const loading = document.getElementById('loading');
+    const header = document.getElementById('header');
+
+    const la28OlympicsDate = new Date('2028-07-24');
+    
+    function updateCountdown() {
+      const today = new Date();
+      const timeDiff = la28OlympicsDate - today;
+      const daysRemaining = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
+
+      header.textContent = `LA28•${daysRemaining}`;
+    }
+
+    updateCountdown();
+
+    let currentIndex = 0;
+    const itemsPerPage = 3;
+
+    function loadEpisodes() {
+      const endIndex = Math.min(currentIndex + itemsPerPage, episodes.length);
+      for (let i = currentIndex; i < endIndex; i++) {
+        const episode = episodes[i];
+        const li = document.createElement('li');
+        li.innerHTML = `
+          <a href="${episode.clickUrl || '#'}" target="_blank">
+            <img src="${episode.imageUrl}" alt="${episode.title} 이미지" onload="checkAllImagesLoaded()" onerror="checkAllImagesLoaded()">
+            <h3>${episode.title}</h3>
+          </a>
+        `;
+        episodeList.appendChild(li);
+
+        // 다음 게시물에 visible 클래스 추가 (부드럽게 나타나도록)
+        setTimeout(() => {
+          li.classList.add('visible');
+        }, 10); // 작은 지연 후 클래스 추가
+      }
+      currentIndex = endIndex;
+
+      if (currentIndex >= episodes.length) {
+        window.removeEventListener('scroll', handleScroll);
+      }
+    }
+
+    function handleScroll() {
+      const scrollPosition = window.innerHeight + window.scrollY;
+      const documentHeight = document.documentElement.scrollHeight;
+
+      if (scrollPosition + 100 >= documentHeight) {
+        loadEpisodes();
+      }
+    }
+
+    function checkAllImagesLoaded() {
+      const images = document.querySelectorAll('.episode-list img');
+      const loadedImages = Array.from(images).filter(img => img.complete);
+      if (loadedImages.length === images.length) {
+        loading.style.display = 'none';
+      }
+    }
+
+    // 초기 로딩 시 첫 3개의 게시물 로드
+    loadEpisodes();
+
+    // 스크롤 이벤트 리스너 등록
+    window.addEventListener('scroll', handleScroll);
+
+    // 이미지가 없거나 클릭 URL이 없는 경우에도 로딩 문구를 숨깁니다.
+    if (episodes.length === 0) {
+      loading.style.display = 'none';
+    }
+  </script>
+</body>
+</html>
