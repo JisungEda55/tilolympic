@@ -30,11 +30,14 @@
     }
     .main-title {
       text-align: left;
-      font-size: 2.93em;
       margin-bottom: 10px;
       margin-top: 5px;
       font-weight: 800;
       color: #010101;
+    }
+    .main-title img {
+      max-width: 100%;
+      height: auto;
     }
     .author {
       font-size: 1.2em;
@@ -157,7 +160,6 @@
       }
       .main-title {
         text-align: left;
-        font-size: 2.93em;
         margin-bottom: 10px;
         margin-top: 5px;
       }
@@ -209,7 +211,6 @@
         margin-top: 0;
       }
       .main-title {
-        font-size: 2em;
         text-align: center;
       }
       .author {
@@ -247,7 +248,9 @@
   <header class="header" id="header">
     <!-- LA28 올림픽 디데이 -->
   </header>
-  <h1 class="main-title">Til Olympic<br>올림픽까지</h1>
+  <h1 class="main-title">
+    <img src="https://i.postimg.cc/VkH8gqqP/2.png" alt="Til Olympic">
+  </h1>
   <div class="author">신지성</div>
 
   <div class="partners">
@@ -344,11 +347,6 @@
 
     // 스크롤 이벤트 리스너 등록
     window.addEventListener('scroll', handleScroll);
-
-    // 이미지가 없거나 클릭 URL이 없는 경우에도 로딩 문구를 숨깁니다.
-    if (episodes.length === 0) {
-      loading.style.display = 'none';
-    }
   </script>
 </body>
 </html>
