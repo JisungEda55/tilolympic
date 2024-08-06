@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Til Olympic</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"> <!-- FontAwesome 라이브러리 추가 -->
   <style>
     @font-face {
       font-family: 'LINESeedKR-Bd';
@@ -13,7 +13,6 @@
       font-style: normal;
     }
 
-    /* 기본 스타일은 모바일 레이아웃으로 설정 */
     body {
       font-family: 'LINESeedKR-Bd', sans-serif; /* 기본 폰트를 LINESeedKR-Bd로 설정 */
       line-height: 1.6;
@@ -146,6 +145,31 @@
     .partners .partner-logos a:hover img {
       transform: scale(1.1); /* 호버 시 확대 효과 */
     }
+    .video-container {
+      margin-top: 30px;
+      text-align: center;
+      background-color: #f2f2f7;
+      padding: 15px;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    .video-container iframe {
+      width: 100%;
+      height: 315px; /* 비디오 높이 조정 */
+      border-radius: 8px;
+    }
+    .video-container h2 {
+      display: flex;
+      align-items: center;
+      font-size: 1.8em;
+      margin-bottom: 15px;
+      color: #010101;
+    }
+    .video-container h2 i {
+      margin-left: 10px;
+      font-size: 1.5em;
+      color: #ff0a00; /* YouTube 아이콘 색상 */
+    }
     @media (min-width: 731px) {
       body {
         margin: 0 auto;
@@ -233,21 +257,22 @@
         margin-bottom: 15px;
       }
       .episode-list h3 {
-        font-size: 1.5em;
+        font-size: 1.2em;
         margin-bottom: 5px;
         color: #010101;
         text-align: left;
         width: 100%;
-        padding: 0 15px;
+        padding: 0;
+      }
+      .video-container iframe {
+        height: 200px; /* 모바일에서 비디오 높이 조정 */
       }
     }
   </style>
 </head>
 <body>
-  <div class="loading" id="loading">사진을 서버에서 불러오는 중입니다...<br>최대 3분 소요됩니다.<br>기다려주셔서 감사합니다. :D</div>
-  <header class="header" id="header">
-    <!-- LA28 올림픽 디데이 -->
-  </header>
+  <div class="loading" id="loading">Loading...</div>
+  <header class="header" id="header">LA28•0</header>
   <h1 class="main-title">
     <img src="https://i.postimg.cc/VkH8gqqP/2.png" alt="Til Olympic">
   </h1>
@@ -262,6 +287,11 @@
       <a href="https://kia.com" target="_blank"><img src="https://www.kia.com/content/dam/kwp/kr/ko/vehicles/ev3/24my/gallery/image/ev3_gallery_image_04.jpg" alt="EV3"></a>
       <a href="https://naver.com" target="_blank"><img src="https://play-lh.googleusercontent.com/-REeRpbsL3nQTjoDfRzxvqgdqwtp6Pflbx8P3aqvCQsed5zJabGZ4qYC01G_q-9svn4" alt="NAVERPAY"></a>
     </div>
+  </div>
+
+  <div class="video-container">
+    <h2>Latest Video <a href="https://www.youtube.com/" target="_blank"><i class="fa-brands fa-youtube" style="color: #d73920;"></i></a></h2>
+    <iframe src="https://www.youtube.com/embed/7NTSELuAslE?si=R5eF92uVNAKG71GR" frameborder="0" allowfullscreen></iframe><!-- 유튜브 Embed --->
   </div>
 
   <div class="episode-list">
