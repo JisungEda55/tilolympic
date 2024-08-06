@@ -347,6 +347,11 @@
 
     // 스크롤 이벤트 리스너 등록
     window.addEventListener('scroll', handleScroll);
+
+    // 우클릭 방지
+    document.addEventListener('contextmenu', function(e) {
+      e.preventDefault();
+    });
   </script>
 </body>
 </html>
