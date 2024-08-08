@@ -80,8 +80,10 @@
       transform: translateY(-5px); /* 호버 시 이동 효과 */
     }
     .episode-list img {
-      max-width: 100%;
+      width: 100%;
+      aspect-ratio: 16 / 10; /* 16:10 비율 유지 */
       border-radius: 8px;
+      object-fit: cover; /* 이미지가 비율을 유지하며 전체를 덮도록 조정 */
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
       margin-bottom: 15px;
     }
@@ -128,7 +130,7 @@
     .partners .partner-logos a {
       display: inline-block;
       width: 80px; /* 로고의 너비를 고정 */
-      height: 80px; /* 로고의 높이를 고정 */
+      aspect-ratio: 1; /* 너비와 높이의 비율을 1:1로 설정 */
       border-radius: 10px; /* 둥근 모서리 설정 */
       overflow: hidden; /* 둥근 사각형 내에서 넘치는 부분을 숨김 */
       background-color: #fff; /* 배경색 설정 (선택 사항) */
@@ -137,11 +139,14 @@
       justify-content: center;
       align-items: center;
     }
+
     .partners .partner-logos img {
-      max-width: 100%;
-      max-height: 100%;
+      width: 92%; /* 부모 요소의 95%만큼 너비 설정 */
+      height: 92%; /* 부모 요소의 95%만큼 높이 설정 */
       object-fit: contain; /* 이미지가 비율을 유지하며 크기에 맞게 조정 */
+      aspect-ratio: 1; /* 이미지를 정사각형 비율로 유지 */
     }
+
     .partners .partner-logos a:hover img {
       transform: scale(1.1); /* 호버 시 확대 효과 */
     }
@@ -209,8 +214,10 @@
         transition: opacity 0.5s ease-in, transform 0.3s ease-in-out; /* 호버 애니메이션 부드럽게 */
       }
       .episode-list img {
-        max-width: 100%;
+        width: 100%;
+        aspect-ratio: 16 / 10; /* 16:10 비율 유지 */
         border-radius: 8px;
+        object-fit: cover; /* 이미지가 비율을 유지하며 전체를 덮도록 조정 */
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         margin-bottom: 15px;
       }
@@ -251,8 +258,10 @@
         text-align: left;
       }
       .episode-list img {
-        max-width: 100%;
+        width: 100%;
+        aspect-ratio: 16 / 10; /* 16:10 비율 유지 */
         border-radius: 8px;
+        object-fit: cover; /* 이미지가 비율을 유지하며 전체를 덮도록 조정 */
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         margin-bottom: 15px;
       }
